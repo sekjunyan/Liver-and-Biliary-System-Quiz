@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liver & Biliary Tract — Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bile: #c8a84b;
+    --bile-light: #f0e2aa;
+    --liver: #7a2d3a;
+    --liver-mid: #a34050;
+    --liver-pale: #f5e8ea;
+    --ink: #1a1210;
+    --slate: #4a3f3a;
+    --parchment: #faf6f0;
+    --cream: #f2ece2;
+    --white: #ffffff;
+    --correct: #2e6b45;
+    --incorrect: #8b2020;
+    --border: rgba(122,45,58,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--liver);
+    color: var(--white);
+    padding: 3.5rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(200,168,75,0.18) 0%, transparent 65%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  header .subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bile-light);
+    margin-top: 0.5rem;
+    position: relative;
+  }
+  header .badge {
+    display: inline-block;
+    background: var(--bile);
+    color: var(--liver);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: var(--cream);
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav button {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 1rem 1.6rem;
+    border: none;
+    background: transparent;
+    color: var(--slate);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+  nav button:hover { color: var(--liver); }
+  nav button.active {
+    color: var(--liver);
+    border-bottom-color: var(--bile);
+    background: var(--parchment);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  .section { display: none; }
+  .section.visible { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--liver);
+    margin-bottom: 0.3rem;
+  }
+  .section-header p {
+    color: var(--slate);
+    font-size: 0.95rem;
+  }
+
+  /* ── LEARNING OBJECTIVES ── */
+  .obj-group { margin-bottom: 2.2rem; }
+  .obj-group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--liver-mid);
+    margin-bottom: 0.9rem;
+    padding: 0.5rem 1rem;
+    background: var(--liver-pale);
+    border-left: 4px solid var(--liver);
+    border-radius: 0 4px 4px 0;
+  }
+  .obj-list { list-style: none; }
+  .obj-list li {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.4rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: border-color 0.15s;
+  }
+  .obj-list li:hover { border-color: var(--bile); }
+  .obj-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--bile);
+    background: var(--liver);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    min-width: 2.2rem;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .bloom-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    background: var(--bile-light);
+    color: var(--liver);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SHORT ANSWER ── */
+  .sa-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.8rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(122,45,58,0.06);
+  }
+  .sa-q {
+    padding: 1.2rem 1.4rem;
+    background: var(--liver-pale);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .sa-qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--liver);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .sa-q p { font-weight: 600; font-size: 0.97rem; line-height: 1.5; }
+  .sa-marks {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--slate);
+    font-style: italic;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .sa-reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1.4rem;
+    background: transparent;
+    border: none;
+    border-top: 1px dashed var(--border);
+    color: var(--liver-mid);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .sa-reveal-btn:hover { background: var(--cream); }
+  .sa-reveal-btn::after { content: ' ▾'; }
+  .sa-reveal-btn.open::after { content: ' ▴'; }
+  .sa-answer {
+    display: none;
+    padding: 1.2rem 1.4rem;
+    border-top: 1px solid var(--border);
+    background: #f8fdf9;
+  }
+  .sa-answer.visible { display: block; animation: fadeIn 0.25s ease; }
+  .sa-answer h4 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--correct);
+    margin-bottom: 0.8rem;
+  }
+  .sa-answer ul { padding-left: 1.3rem; }
+  .sa-answer ul li { margin-bottom: 0.4rem; font-size: 0.94rem; }
+  .sa-answer p { font-size: 0.94rem; margin-bottom: 0.5rem; }
+  .sa-answer strong { color: var(--liver); }
+
+  /* ── MCQ ── */
+  .mcq-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.4rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .mcq-progress .score-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--liver);
+    font-weight: 500;
+  }
+  .progress-bar-wrap {
+    flex: 1; margin: 0 1.2rem;
+    height: 8px;
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar { height: 100%; background: var(--bile); border-radius: 4px; transition: width 0.4s ease; width: 0%; }
+  .mcq-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(122,45,58,0.06);
+  }
+  .mcq-card.answered-correct { border-color: var(--correct); }
+  .mcq-card.answered-wrong { border-color: var(--incorrect); }
+  .mcq-header {
+    padding: 1.1rem 1.4rem;
+    background: var(--liver-pale);
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+  .mcq-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--white);
+    background: var(--liver);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .mcq-header p { font-weight: 600; font-size: 0.97rem; line-height: 1.5; }
+  .mcq-options { padding: 1rem 1.4rem; display: flex; flex-direction: column; gap: 0.55rem; }
+  .mcq-opt {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.94rem;
+  }
+  .mcq-opt:hover:not(.locked) { border-color: var(--bile); background: var(--bile-light); }
+  .opt-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--liver);
+    background: var(--liver-pale);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    min-width: 1.8rem;
+    text-align: center;
+  }
+  .mcq-opt.correct { border-color: var(--correct); background: #e8f5ed; }
+  .mcq-opt.correct .opt-letter { background: var(--correct); color: white; }
+  .mcq-opt.wrong { border-color: var(--incorrect); background: #faeaea; }
+  .mcq-opt.wrong .opt-letter { background: var(--incorrect); color: white; }
+  .mcq-opt.locked { cursor: default; }
+  .mcq-explain {
+    display: none;
+    padding: 0.9rem 1.4rem;
+    border-top: 1px solid var(--border);
+    background: #f5fdf7;
+    font-size: 0.9rem;
+    color: var(--slate);
+  }
+  .mcq-explain.visible { display: block; animation: fadeIn 0.25s ease; }
+  .mcq-explain strong { color: var(--correct); }
+
+  /* ── MCQ RESULTS ── */
+  #results-panel {
+    display: none;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--white);
+    border: 2px solid var(--liver);
+    border-radius: 12px;
+    text-align: center;
+  }
+  #results-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--liver);
+    margin-bottom: 0.5rem;
+  }
+  #results-panel .big-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--bile);
+    display: block;
+    margin: 0.5rem 0;
+  }
+  #results-panel .result-msg { color: var(--slate); margin-bottom: 1.2rem; }
+  #reset-btn {
+    background: var(--liver);
+    color: white;
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 6px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background 0.15s;
+  }
+  #reset-btn:hover { background: var(--liver-mid); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav button { padding: 0.8rem 0.8rem; font-size: 0.78rem; }
+    .section-header h2 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">4th Year Veterinary Surgery</div>
+  <h1>Liver &amp; Biliary Tract</h1>
+  <p class="subtitle">Study Guide &amp; Self-Assessment — Dr. Sek &amp; Dr. Thomson</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('objectives', this)">Learning Objectives</button>
+  <button onclick="showTab('shortanswer', this)">Short Answer</button>
+  <button onclick="showTab('mcq', this)">MCQ Quiz</button>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════ LEARNING OBJECTIVES ═══════════════════════ -->
+  <div class="section visible" id="objectives">
+    <div class="section-header">
+      <h2>Learning Objectives</h2>
+      <p>By the end of this lecture you should be able to achieve all of the following. Bloom's taxonomy level is indicated for each.</p>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">1 — Surgical Anatomy</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">1.1</span>Name the five hepatic lobes and three surgical divisions, describe the vascular supply and venous drainage of each division, and explain how this anatomy determines resectability and haemorrhage risk.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">1.2</span>Identify the key hepatic ligaments and attachments (coronary, triangular, hepatorenal, lesser omentum) and explain their surgical relevance — including access to the epiploic foramen for the Pringle manoeuvre.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">1.3</span>Describe the dual blood supply to the liver, quantify each contribution to flow and oxygen delivery, and explain why 95% of tumour blood supply derives from the hepatic artery.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">1.4</span>Trace bile from hepatocyte to duodenum, naming each structure in sequence, and explain how cholecystokinin controls flow.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">1.5</span>Compare canine and feline biliary-pancreatic ductal anatomy and explain how feline anatomy predisposes to triaditis and why cats have higher biliary stenting re-obstruction rates.<span class="bloom-tag">Analyse</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">2 — Hepatic Physiology &amp; Perioperative Relevance</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">2.1</span>Explain why hypoalbuminaemia and hypoglycaemia are late signs of hepatic failure (>70–80% functional loss) and describe their perioperative implications.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">2.2</span>List the coagulation factors synthesised by the liver, identify the exceptions (Factor VIII, vWF), and explain the threshold below which spontaneous haemorrhage occurs.<span class="bloom-tag">Remember / Understand</span></li>
+        <li><span class="obj-num">2.3</span>Justify the selection of isoflurane/sevoflurane over halothane in patients with hepatic disease, and describe necessary dose adjustments for hepatically metabolised drugs.<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">2.4</span>Explain the role of bile in fat emulsification, endotoxin binding, and gut homeostasis — and predict the consequences of biliary obstruction on systemic inflammation.<span class="bloom-tag">Analyse</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">3 — Pathophysiology</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">3.1</span>Describe the regenerative capacity of the liver following hepatectomy, including the timeline for recovery, maximum safe acute resection volume, and the portal pressure threshold associated with poor survival.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">3.2</span>Outline the systemic consequences of extrahepatic biliary obstruction (EHBO), including cardiovascular, renal, coagulation, GI, and immunological effects, and explain the mechanism of each.<span class="bloom-tag">Analyse</span></li>
+        <li><span class="obj-num">3.3</span>Describe the pathophysiology and diagnosis of bile peritonitis, distinguishing sterile from septic forms, and outline immediate management priorities.<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">3.4</span>Compare common causes of EHBO in dogs versus cats.<span class="bloom-tag">Analyse</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">4 — Preoperative Workup &amp; Preparation</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">4.1</span>Construct a preoperative assessment plan for a patient undergoing hepatic surgery, including required blood work, targets for each parameter, and corrective actions for abnormal values.<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">4.2</span>Select appropriate IV fluid regimens for patients with EHBO, justifying choice of crystalloid and contraindications (e.g. lactated Ringer's in severe hepatic failure).<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">4.3</span>Recommend empirical antibiotic selection for biliary surgery and explain the rationale, including common organisms isolated from bile in EHBO cases.<span class="bloom-tag">Apply</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">5 — Surgical Procedures: Biopsy &amp; Resection</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">5.1</span>Compare the seven biopsy techniques (FNA, Tru-Cut, guillotine, suture compression/wedge, tissue fracture, biopsy punch, laparoscopic cup forceps) across the dimensions of invasiveness, diagnostic accuracy, bleeding risk, and best indication.<span class="bloom-tag">Evaluate</span></li>
+        <li><span class="obj-num">5.2</span>Describe the step-by-step technique for guillotine biopsy, suture compression/wedge biopsy, tissue fracture, and biopsy punch biopsy — including haemostatic measures for each.<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">5.3</span>Explain why the guillotine technique is contraindicated for complete lobectomy and describe the preferred alternative for left lateral lobe resection.<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">5.4</span>Describe intraoperative haemorrhage control strategies, from basic tissue handling through to Pringle manoeuvre and total hepatic vascular exclusion, and state the indication for each.<span class="bloom-tag">Apply</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">6 — Biliary Tract Disease</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">6.1</span>Explain the pathogenesis, ultrasonographic diagnosis, and surgical treatment of gallbladder mucocoele, and state the elective versus non-elective mortality rates.<span class="bloom-tag">Understand / Apply</span></li>
+        <li><span class="obj-num">6.2</span>Describe the indications, technique, and anatomical basis for cholecystoduodenostomy versus choledochal stenting, and explain why species anatomy influences technique choice.<span class="bloom-tag">Analyse</span></li>
+        <li><span class="obj-num">6.3</span>Outline the management algorithm for a patient with EHBO, from medical stabilisation through to surgical intervention, including the decision to operate.<span class="bloom-tag">Evaluate</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">7 — Portosystemic Shunts</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">7.1</span>Classify portosystemic shunts (congenital vs acquired; intrahepatic vs extrahepatic) and describe breed predispositions, typical clinical signs, and the key diagnostic test (bile acids).<span class="bloom-tag">Understand</span></li>
+        <li><span class="obj-num">7.2</span>Describe the medical management of hepatic encephalopathy prior to surgery, including the role of lactulose, diet modification, and antibiotics.<span class="bloom-tag">Apply</span></li>
+        <li><span class="obj-num">7.3</span>Compare surgical attenuation methods (suture ligation, ameroid constrictor, cellophane band, hydraulic occluder, transjugular coil embolisation) and justify why gradual attenuation is preferred.<span class="bloom-tag">Evaluate</span></li>
+        <li><span class="obj-num">7.4</span>Identify and describe management of the four major postoperative complications of PSS surgery: hypoglycaemia, portal hypertension, postoperative seizures, and persistent shunting.<span class="bloom-tag">Apply</span></li>
+      </ul>
+    </div>
+
+    <div class="obj-group">
+      <div class="obj-group-title">8 — Hepatic Neoplasia</div>
+      <ul class="obj-list">
+        <li><span class="obj-num">8.1</span>Classify primary and secondary hepatic tumours in dogs and cats, and compare their prognosis and surgical management, with emphasis on the excellent outcome for massive hepatocellular carcinoma.<span class="bloom-tag">Analyse</span></li>
+        <li><span class="obj-num">8.2</span>Explain why nodular hyperplasia and hepatic neoplasia can appear grossly identical and describe the appropriate diagnostic workup.<span class="bloom-tag">Understand</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ SHORT ANSWER ═══════════════════════ -->
+  <div class="section" id="shortanswer">
+    <div class="section-header">
+      <h2>Short Answer Questions</h2>
+      <p>These questions mirror the depth expected in a final-year clinical exam. Write your answer before revealing the model answer. Cover key points rather than reproducing verbatim.</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q1</span>
+        <p>A 7-year-old male-neutered Golden Retriever presents with a 2-week history of lethargy, icterus, and intermittent vomiting. Abdominal ultrasound reveals a massively enlarged, solitary liver mass in the left lateral lobe with a gravity-independent echogenic pattern in the gallbladder. List the preoperative investigations you would perform and the specific corrective action for each abnormal finding anticipated.</p>
+        <span class="sa-marks">(12 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <p><strong>Haematology &amp; Coagulation:</strong></p>
+        <ul>
+          <li><strong>PT/aPTT/PIVKA</strong> — vitamin K₁ 0.5–1.5 mg/kg SC/IM q12h × 3 doses if elevated; FFP 10 mL/kg if actively coagulopathic.</li>
+          <li><strong>Platelet count</strong> — if &lt;80,000/µL, major haemorrhage risk; delay biopsy/surgery.</li>
+          <li><strong>PCV/TP</strong> — cross-match blood and have packed RBCs available.</li>
+        </ul>
+        <p><strong>Biochemistry:</strong></p>
+        <ul>
+          <li><strong>Serum albumin</strong> — if &lt;20 g/L give colloid (hetastarch 10–20 mL/kg in dogs).</li>
+          <li><strong>Bilirubin, ALP, ALT, GGT</strong> — quantifies degree of cholestasis; markedly elevated values indicate friable parenchyma.</li>
+          <li><strong>Blood glucose</strong> — supplement perioperatively if hypoglycaemic; monitor closely intraoperatively.</li>
+          <li><strong>BUN, creatinine</strong> — EHBO can cause acute renal failure via endotoxin-mediated vasoconstriction.</li>
+        </ul>
+        <p><strong>Imaging:</strong></p>
+        <ul>
+          <li>Thoracic radiographs — screen for pulmonary metastases (massive HCC has excellent prognosis if no mets).</li>
+          <li>CT angiography — delineate vascular anatomy and confirm resectability.</li>
+        </ul>
+        <p><strong>Concurrent gallbladder finding:</strong> The gravity-independent echogenic pattern = gallbladder mucocoele. Confirm CBD patency at surgery. Plan concurrent cholecystectomy; elective mortality ~2% but rises to ~20% if ruptured.</p>
+        <p><strong>Anaesthetic preparation:</strong> Prefer isoflurane/sevoflurane; avoid halothane. Prepare for ventilation (large hepatic mass may compress diaphragm). Clip cranial thorax bilaterally in case paracostal extension or thoracotomy is needed.</p>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q2</span>
+        <p>Describe the pathophysiology of extrahepatic biliary obstruction (EHBO) and explain how each systemic consequence should influence perioperative management of the patient.</p>
+        <span class="sa-marks">(10 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <ul>
+          <li><strong>Cardiovascular (hypotension, ↓CO):</strong> "Jaundiced heart" — impaired response to vasopressors. Manage: aggressive isotonic crystalloid resuscitation (Normosol-R / PlasmaLyte preferred); avoid lactated Ringer's if severe hepatic dysfunction. Monitor blood pressure continuously.</li>
+          <li><strong>Acute renal failure:</strong> Endotoxin → renal vasoconstriction → tubular necrosis. Manage: ensure adequate preoperative hydration; monitor urine output intraoperatively; avoid nephrotoxic drugs.</li>
+          <li><strong>Coagulopathy / DIC:</strong> Vitamin K malabsorption (fat-soluble) → deficiency of factors II, VII, IX, X. Manage: Vit K₁ SC/IM pre-op; FFP if coagulopathic; monitor PT/aPTT/PIVKA.</li>
+          <li><strong>GI haemorrhage:</strong> Endotoxin → gastric mucosal ischaemia + ↑ acid secretion. Manage: omeprazole/famotidine perioperatively.</li>
+          <li><strong>Endotoxaemia:</strong> Bile absent from gut → ↑ gram-negative bacteria → endotoxin absorbed. Manage: broad-spectrum antibiotics (cefoxitin ± ampicillin); collect intraoperative bile cultures.</li>
+          <li><strong>Delayed wound healing:</strong> Manage: minimise tissue trauma (Halsted's principles); use omentum to support biopsy/anastomosis sites.</li>
+          <li><strong>Ultrasound timing:</strong> CBD dilates at 24–48 h; lobar ducts at 4–6 days; intrahepatic ducts by 1 week. Normal CBD = 3–4 mm. Sequential US helps confirm obstruction and guide timing of surgery.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q3</span>
+        <p>Compare and contrast the guillotine, suture compression/wedge, and tissue fracture biopsy techniques of the liver. For each, describe the technique, ideal indication, and the key risk or limitation.</p>
+        <span class="sa-marks">(9 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <p><strong>Guillotine:</strong> Absorbable suture passed through liver parenchyma encircling vessels/bile ducts; tissue distal to ligature is excised. Ideal for pointed lobe ends. Key risk: ligature slippage — <em>do NOT use for lobectomy</em> due to risk of catastrophic haemorrhage if the suture fails on a large vessel.</p>
+        <p><strong>Suture compression / Wedge:</strong> V-shaped suture lines placed along lobe edges to compress and isolate tissue; excised sharply within the V. Ideal for peripheral, edge lesions. Key risk: minimal if technique is correct, but requires accessible lobe margins; not suitable for deep/central lesions.</p>
+        <p><strong>Tissue fracture:</strong> Blunt fracture of parenchyma with scalpel handle or fingers; reveals intact vessels and bile ducts that are then individually clamped and ligated. Ideal for larger masses where individual vessel ligation is needed. Key risk: parenchymal surface bleeding, which must be controlled with topical haemostatic agents and individual ligation — requires meticulous technique.</p>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q4</span>
+        <p>A 3-year-old male Yorkshire Terrier presents with stunted growth, post-prandial ptyalism, and a single episode of seizure-like activity. Bile acids are markedly elevated. Describe your medical stabilisation protocol prior to surgery and explain why each element is important.</p>
+        <span class="sa-marks">(10 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <p>Minimum 2 weeks of medical stabilisation is required before anaesthesia for PSS.</p>
+        <ul>
+          <li><strong>Lactulose</strong> (0.5–1.0 mL/kg PO q6–8h) — osmotically traps NH₃ in colon; acidifies colonic environment; targets 2–3 soft stools/day. Reduces ammonia load causing HE.</li>
+          <li><strong>Antibiotics</strong> — metronidazole (7.5 mg/kg q12h) or ampicillin (22 mg/kg q6h) — reduce urease-producing intestinal bacteria, decreasing ammonia production.</li>
+          <li><strong>Dietary protein restriction</strong> — 18–22% DM basis in dogs; dairy/vegetable proteins preferred (fewer aromatic amino acids). Prevents excess ammonia generation while maintaining nutritional support.</li>
+          <li><strong>IV fluid therapy</strong> — electrolyte and glucose support (especially in young/small patients at risk of hypoglycaemia); corrects dehydration and metabolic disturbances.</li>
+          <li><strong>GI protection</strong> — famotidine or omeprazole, especially for intrahepatic PSS (30% GI ulceration preoperatively). Continue lifelong post-attenuation.</li>
+          <li><strong>Hepatoprotectants</strong> — SAMe, ursodeoxycholic acid, Vit E, milk thistle — limited evidence but commonly used to support hepatocellular function.</li>
+          <li><strong>Anticonvulsants</strong> — if ongoing seizure risk: leuprolide, KBr, or phenobarbitone (noting hepatic metabolism of phenobarb).</li>
+          <li><strong>Note on pRBCs/FFP:</strong> stored pRBCs can accumulate ammonia — use with caution; FFP provides coagulation factors if coagulopathic.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q5</span>
+        <p>Explain why cholecystoduodenostomy is preferred over cholecystojejunostomy as a biliary diversion procedure, and describe the key technical considerations for performing a cholecystoduodenostomy, including the minimum stoma size and how the species anatomy of the cat affects technique selection.</p>
+        <span class="sa-marks">(8 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <p><strong>Why duodenum is preferred:</strong> Bile entering the duodenum maintains the physiological feedback loop — cholecystokinin is released, pancreatic secretion is stimulated, and gastric acid is neutralised by bile salts. Bypassing the duodenum (jejunostomy) disrupts this feedback and risks gastric ulceration due to loss of acid-neutralising bile.</p>
+        <p><strong>Minimum stoma size:</strong> &gt;2.5 cm — critical to prevent post-operative stricture formation and re-obstruction.</p>
+        <p><strong>Technical steps:</strong> Confirm CBD is patent (or bypassed) before diversion; appose gallbladder wall to anti-mesenteric border of duodenum without tension; full-thickness anastomosis with absorbable suture; verify patency by retrograde flushing.</p>
+        <p><strong>Dog vs cat anatomy:</strong> In dogs, the CBD and pancreatic duct enter the duodenum separately — a cholecystoduodenostomy effectively bypasses the obstructed CBD while pancreatic drainage remains independent. In cats, the CBD and pancreatic duct conjoin before the major duodenal papilla; only ~20% of cats have an accessory pancreatic duct. This means obstruction at the papilla in cats affects both biliary AND pancreatic drainage simultaneously. For cats with inflammatory obstruction (e.g. from pancreatitis), choledochal stenting is often preferable as it is reversible — but cats have higher re-obstruction rates (2/7 within 1 week) vs dogs. For permanent diversion, the conjoined anatomy in cats does not preclude cholecystoduodenostomy but complicates the underlying disease management.</p>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="sa-card">
+      <div class="sa-q">
+        <span class="sa-qnum">Q6</span>
+        <p>A 9-year-old Shetland Sheepdog presents with acute abdominal pain, mild jaundice, and a leukocytosis. Ultrasound shows a stellate pattern in the gallbladder with pericholecystic hyperechoic fat and a small volume of free abdominal fluid. Effusion bilirubin is 4× serum bilirubin. Outline your immediate management and surgical plan.</p>
+        <span class="sa-marks">(10 marks)</span>
+      </div>
+      <button class="sa-reveal-btn" onclick="toggleAnswer(this)">Reveal Model Answer</button>
+      <div class="sa-answer">
+        <h4>Model Answer</h4>
+        <p><strong>Diagnosis:</strong> Ruptured gallbladder mucocoele with bile peritonitis (effusion:serum bilirubin ≥2:1 confirms bile peritonitis; stellate pattern = mucocoele; pericholecystic fat + free fluid = rupture).</p>
+        <p><strong>Immediate stabilisation:</strong></p>
+        <ul>
+          <li>Aggressive IV crystalloid (Normosol-R or PlasmaLyte) — isotonic fluid resuscitation at 30–60 mL/kg/hr; titrate to response.</li>
+          <li>Broad-spectrum IV antibiotics immediately — cefoxitin 15 mg/kg IV TID ± ampicillin 22 mg/kg IV TID for Enterococcus coverage.</li>
+          <li>Coagulation support: Vit K₁ SC/IM; FFP 10 mL/kg if coagulopathic; colloid (hetastarch) if albumin &lt;20 g/L.</li>
+          <li>Analgesia (opioids; avoid NSAIDs in jaundiced/renally compromised patient).</li>
+          <li>Blood type and crossmatch; secure blood products.</li>
+        </ul>
+        <p><strong>Surgical plan (once haemodynamically stable):</strong></p>
+        <ul>
+          <li>Midline celiotomy (xyphoid to pubis).</li>
+          <li>Cholecystectomy — treatment of choice; removes mucus-producing source.</li>
+          <li>Confirm CBD patency (retrograde catheterisation via duodenotomy; normograde flushing acceptable).</li>
+          <li>Thorough peritoneal lavage with warm sterile saline.</li>
+          <li>Collect bile and tissue for aerobic and anaerobic culture.</li>
+          <li>Closed-suction or open abdominal drainage (Jackson-Pratt) if significant peritoneal contamination remains.</li>
+          <li>Submit gallbladder for histopathology.</li>
+        </ul>
+        <p><strong>Prognosis:</strong> Non-elective (ruptured) mucocoele carries ~20% mortality vs ~2% elective. Albumin and ALT are key prognostic indicators. Discuss this with the owner.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════ MCQ ═══════════════════════ -->
+  <div class="section" id="mcq">
+    <div class="section-header">
+      <h2>MCQ Self-Assessment</h2>
+      <p>Select the single best answer for each question. Explanations are revealed after you answer.</p>
+    </div>
+
+    <div class="mcq-progress">
+      <span>Progress</span>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+      <span class="score-display" id="score-display">0 / 15</span>
+    </div>
+
+    <div id="mcq-container"></div>
+    <div id="results-panel">
+      <h3>Quiz Complete</h3>
+      <span class="big-score" id="final-score">—</span>
+      <p class="result-msg" id="result-msg"></p>
+      <button id="reset-btn" onclick="resetMCQ()">Retake Quiz</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  btn.classList.add('active');
+}
+
+// ── SHORT ANSWER TOGGLE ──
+function toggleAnswer(btn) {
+  const answer = btn.nextElementSibling;
+  const open = answer.classList.contains('visible');
+  answer.classList.toggle('visible', !open);
+  btn.classList.toggle('open', !open);
+}
+
+// ── MCQ DATA ──
+const questions = [
+  {
+    q: "The left division of the canine liver makes up approximately what proportion of total liver volume, and why is it surgically the most amenable to resection?",
+    opts: [
+      "20–25%; it contains only one lobe.",
+      "40–50%; it has a long, narrow hilar pedicle and mobile lobes accessible by standard techniques.",
+      "40–50%; its hepatic veins drain directly into the right atrium.",
+      "60–70%; it is the largest division and therefore the safest to partially remove."
+    ],
+    correct: 1,
+    explain: "The left division (left lateral, left medial lobes, and papillary process) makes up roughly 40–50% of total liver volume. Its long, narrow hilar pedicle and mobile lobes make it highly amenable to suture fracture or stapling techniques. The right division, by contrast, has short wide veins draining directly into the CVC, making it risky."
+  },
+  {
+    q: "Which of the following coagulation factors is NOT produced by the liver?",
+    opts: [
+      "Factor II (prothrombin)",
+      "Factor VII",
+      "Factor VIII",
+      "Factor X"
+    ],
+    correct: 2,
+    explain: "Factor VIII and von Willebrand factor (vWF) are produced primarily by vascular endothelium, not the liver. Factors II, VII, IX, and X are vitamin K-dependent hepatic factors. Protein C, protein S, antithrombin, and fibrinogen are also hepatically synthesised."
+  },
+  {
+    q: "In a jaundiced cat presenting with acute pancreatitis and biliary obstruction, what anatomical feature explains why this species develops triaditis (simultaneous hepatic, biliary, and pancreatic disease) more readily than dogs?",
+    opts: [
+      "Cats have a larger gallbladder relative to body weight than dogs.",
+      "The CBD and pancreatic duct conjoin before entering the major duodenal papilla in cats, with only ~20% having a functional accessory duct.",
+      "Cats lack a sphincter of Oddi, so bile and pancreatic enzymes mix freely.",
+      "In cats, bile canaliculi drain directly into the pancreatic duct."
+    ],
+    correct: 1,
+    explain: "In cats, the CBD and pancreatic duct share a common channel entering the major duodenal papilla. Only ~20% have an accessory pancreatic duct. Therefore, any obstruction at the papilla (e.g. from pancreatitis, neoplasia, or parasites) simultaneously compromises both biliary and pancreatic drainage, predisposing to triaditis."
+  },
+  {
+    q: "What is the effusion:serum bilirubin ratio that confirms bile peritonitis on abdominocentesis?",
+    opts: [
+      "≥1:1",
+      "≥2:1",
+      "≥4:1",
+      "≥10:1"
+    ],
+    correct: 1,
+    explain: "An effusion:serum bilirubin ratio of ≥2:1 confirms bile peritonitis. This is a straightforward and reliable bedside test. Cytology showing bile pigments supports the diagnosis, and 90% of affected animals also have elevated serum bilirubin and ALP."
+  },
+  {
+    q: "Which of the following best describes the guillotine liver biopsy technique and its key limitation?",
+    opts: [
+      "Blunt fracture of parenchyma with individual vessel ligation; limited by parenchymal haemorrhage.",
+      "Absorbable suture passed through parenchyma to encircle vessels; limited because it must NOT be used for complete lobectomy due to ligature slippage risk.",
+      "V-shaped suture line isolating peripheral tissue; limited to deep lesions only.",
+      "Skin punch pressed into parenchyma; limited to lesions >5 cm in diameter."
+    ],
+    correct: 1,
+    explain: "The guillotine technique uses absorbable suture passed through the parenchyma, encircling vessels and ducts, after which tissue is excised distal to the ligature. The critical limitation is that ligature slippage can cause catastrophic haemorrhage — it is therefore contraindicated for complete lobectomy. It is safe for smaller biopsy samples at pointed lobe ends."
+  },
+  {
+    q: "A 5-year-old Labrador is undergoing left lateral liver lobectomy for a massive hepatocellular carcinoma. Severe haemorrhage occurs from the hepatic pedicle. Which manoeuvre provides temporary inflow occlusion to allow haemostatic control?",
+    opts: [
+      "Total hepatic vascular exclusion (THVE)",
+      "Hepatic artery ligation alone",
+      "Pringle manoeuvre — occlusion of the hepatic inflow via the epiploic foramen",
+      "Application of a Satinsky clamp directly to the CVC"
+    ],
+    correct: 2,
+    explain: "The Pringle manoeuvre involves temporary occlusion of both the portal vein and hepatic artery via the epiploic foramen, reducing hepatic inflow and allowing the surgeon to achieve haemostasis. Intermittent clamping is preferred over continuous to minimise ischaemia-reperfusion injury. THVE additionally clamps supra- and infrahepatic CVC and is reserved for extreme situations."
+  },
+  {
+    q: "When performing a complete hepatic lobectomy of the left lateral lobe, which instrument is preferred and why is the guillotine technique contraindicated?",
+    opts: [
+      "Harmonic Scalpel; because electrocautery is contraindicated near bile ducts.",
+      "TA-90 surgical stapler with 3.5mm staples (V3 for small patients); because guillotine ligature slippage on large hilar vessels risks fatal haemorrhage.",
+      "Biopsy punch technique; the guillotine is contraindicated due to excessive thermal spread.",
+      "Suture compression wedge technique; guillotine is ineffective for large lobes."
+    ],
+    correct: 1,
+    explain: "The TA-90 stapler (3.5 mm → 1.5 mm compressed staple height, V3 cartridge for small patients) is preferred for complete left lateral lobectomy — it is rapid, haemostatic, and safe. The guillotine technique is absolutely contraindicated for complete lobectomy because slippage of the encircling ligature off a large hilar vessel will cause catastrophic, potentially fatal haemorrhage."
+  },
+  {
+    q: "Which of the following is the MOST sensitive diagnostic test for a portosystemic shunt in dogs?",
+    opts: [
+      "Serum ammonia",
+      "Serum albumin",
+      "Fasting and 2-hour postprandial bile acids",
+      "Abdominal radiographs demonstrating microhepatica"
+    ],
+    correct: 2,
+    explain: "Fasting and 2-hour postprandial bile acids are the most sensitive diagnostic test for PSS — 100% sensitivity in some studies. Serum ammonia is abnormal in 62–88% (less sensitive). Albumin and radiographs can be suggestive but are neither sensitive nor specific. Note: ammonia tolerance testing (ATT) has 95–100% sensitivity but should NOT be performed if basal ammonia is already elevated."
+  },
+  {
+    q: "Which of the following statements about ameroid constrictors for portosystemic shunt attenuation is CORRECT?",
+    opts: [
+      "They cause immediate complete occlusion and are preferred because this maximises liver perfusion from day 1.",
+      "They are made of a hygroscopic casein inner ring that gradually absorbs fluid, slowly closing the shunt over 2–5 weeks.",
+      "They require repeat inflation with saline every 2 weeks via a subcutaneous port.",
+      "They are the recommended technique for intrahepatic portosystemic shunts accessed via thoracotomy."
+    ],
+    correct: 1,
+    explain: "Ameroid constrictors have a hygroscopic casein inner ring encased in stainless steel. The casein slowly absorbs body fluid and swells, progressively narrowing then occluding the shunt vessel over approximately 2–5 weeks. This gradual attenuation reduces the risk of acute portal hypertension. They are gas sterilised — wait 12–24 hours before use. The subcutaneous port/saline injection method describes the hydraulic occluder, not the ameroid."
+  },
+  {
+    q: "A 10-week-old Yorkshire Terrier is 3 hours post-surgery for extrahepatic portosystemic shunt attenuation. It becomes non-responsive with a blood glucose of 1.8 mmol/L. What is the most appropriate immediate intervention?",
+    opts: [
+      "Administer lactulose enema and restart oral feeding.",
+      "IV dextrose bolus and initiation of oral feeding; consider dexamethasone if refractory (extrahepatic PSS).",
+      "Administer propofol infusion and phenobarbital loading.",
+      "Immediate surgical exploration to remove the ameroid constrictor."
+    ],
+    correct: 1,
+    explain: "Hypoglycaemia is common after extrahepatic PSS attenuation, affecting 44% of dogs within 4 hours, with toy breeds most at risk. Immediate management is IV dextrose bolus followed by initiation of oral feeding. For refractory hypoglycaemia (29% of affected dogs), dexamethasone can be considered — but this is only for extrahepatic PSS cases. Propofol + phenobarbital loading is the treatment for post-operative seizures, not hypoglycaemia."
+  },
+  {
+    q: "In a dog with a suspected gallbladder mucocoele on ultrasound, which finding on imaging is most indicative of gallbladder RUPTURE (as opposed to intact mucocoele)?",
+    opts: [
+      "A stellate or 'kiwi fruit' echogenic pattern within the gallbladder.",
+      "Gallbladder wall thickening on ultrasound.",
+      "Pericholecystic hyperechoic fat or free abdominal fluid.",
+      "Gravity-dependent sludge within the gallbladder lumen."
+    ],
+    correct: 2,
+    explain: "Pericholecystic hyperechoic fat (representing peritoneal fat reaction) and free abdominal fluid are the key ultrasound signs of gallbladder rupture. The stellate/kiwi pattern indicates mucocoele but does NOT distinguish intact from ruptured. Gravity-independent echogenic content (not dependent) is characteristic of mucocoele vs simple sludge. US sensitivity for GB rupture is ~85.7%."
+  },
+  {
+    q: "Which statement best explains why Normosol-R or PlasmaLyte is preferred over Lactated Ringer's solution in patients with severe EHBO?",
+    opts: [
+      "Lactated Ringer's has a lower sodium concentration causing hyponatraemia.",
+      "Lactated Ringer's contains calcium which precipitates bile salts in the IV line.",
+      "Lactated Ringer's requires hepatic metabolism of lactate to bicarbonate — impaired in severe hepatic dysfunction, risking iatrogenic lactic acidosis.",
+      "Normosol-R has a significantly higher potassium concentration, correcting the hypokalaemia associated with EHBO."
+    ],
+    correct: 2,
+    explain: "Lactated Ringer's contains lactate which must be converted to bicarbonate by the liver. In severe hepatic dysfunction, this conversion is impaired, potentially worsening metabolic acidosis rather than correcting it. Normosol-R and PlasmaLyte are alkalinising solutions that do not rely on hepatic metabolism, making them preferred in these patients."
+  },
+  {
+    q: "What is the maximum acute hepatic resection volume considered well-tolerated in a healthy dog, and above what portal pressure does survival become significantly compromised?",
+    opts: [
+      "50%; >10 mmHg",
+      "65–70%; >16 mmHg",
+      "84%; >20 mmHg",
+      "50%; >24 cmH₂O"
+    ],
+    correct: 1,
+    explain: "Acute resection of up to 65–70% is well-tolerated in healthy dogs, with near-complete hypertrophy achieved by 6 days. Resection of 84% is NOT tolerated acutely. Portal pressure >16 mmHg after resection is associated with poor survival — this threshold guides intraoperative decision-making when planning extensive hepatectomy."
+  },
+  {
+    q: "Which of the following hepatic tumour types carries the BEST long-term prognosis following surgical resection in dogs?",
+    opts: [
+      "Diffuse hepatocellular carcinoma",
+      "Cholangiocellular carcinoma",
+      "Neuroendocrine carcinoma",
+      "Massive hepatocellular carcinoma (single lobe involvement)"
+    ],
+    correct: 3,
+    explain: "Massive hepatocellular carcinoma — where a single, expansile mass involves one lobe (most commonly the left lobe, 67–68% of cases) — has an excellent prognosis following complete surgical resection, with a median survival exceeding 1460 days (4 years) and perioperative mortality of only 4.8%. This contrasts sharply with nodular or diffuse HCC (poor prognosis), cholangiocellular carcinoma (88% metastatic at necropsy in dogs), and neuroendocrine carcinoma (diffuse in 100%, metastatic in 93%)."
+  },
+  {
+    q: "Post-operative seizures are a recognised life-threatening complication of portosystemic shunt surgery. Which of the following statements about this complication is CORRECT?",
+    opts: [
+      "Seizures occur in 3–18% of dogs and 8–22% of cats, typically peaking within 80 hours post-op; propofol bolus + CRI is first-line treatment.",
+      "Post-operative seizures are caused by hypoglycaemia and treated exclusively with IV dextrose.",
+      "The complication is rare (&lt;1%) and almost always resolves spontaneously without treatment.",
+      "Phenobarbital is contraindicated in these patients because it is fully metabolised by the liver."
+    ],
+    correct: 0,
+    explain: "Post-operative seizures occur in 3–18% of dogs and 8–22% of cats, peaking up to 80 hours post-operatively. The cause is unknown but endogenous benzodiazepine imbalance has been proposed. Treatment includes propofol bolus + CRI, phenobarbital loading, and mannitol for cerebral oedema. Prognosis is poor — approximately 50% of affected dogs die or are euthanised. This is a true life-threatening emergency requiring prompt, aggressive management."
+  }
+];
+
+// ── RENDER MCQ ──
+let answered = 0;
+let correct = 0;
+const letters = ['A','B','C','D'];
+
+function renderMCQ() {
+  const container = document.getElementById('mcq-container');
+  container.innerHTML = '';
+  answered = 0; correct = 0;
+  updateProgress();
+
+  questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    card.id = `mcq-${qi}`;
+
+    const header = document.createElement('div');
+    header.className = 'mcq-header';
+    header.innerHTML = `<span class="mcq-num">Q${qi+1}</span><p>${q.q}</p>`;
+    card.appendChild(header);
+
+    const opts = document.createElement('div');
+    opts.className = 'mcq-options';
+    q.opts.forEach((o, oi) => {
+      const opt = document.createElement('div');
+      opt.className = 'mcq-opt';
+      opt.innerHTML = `<span class="opt-letter">${letters[oi]}</span><span>${o}</span>`;
+      opt.onclick = () => selectAnswer(qi, oi, opt, card);
+      opts.appendChild(opt);
+    });
+    card.appendChild(opts);
+
+    const explain = document.createElement('div');
+    explain.className = 'mcq-explain';
+    explain.innerHTML = `<strong>Explanation:</strong> ${q.explain}`;
+    card.appendChild(explain);
+
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qi, selected, optEl, card) {
+  if (card.classList.contains('answered-correct') || card.classList.contains('answered-wrong')) return;
+
+  const allOpts = card.querySelectorAll('.mcq-opt');
+  allOpts.forEach(o => o.classList.add('locked'));
+
+  const isCorrect = selected === questions[qi].correct;
+  optEl.classList.add(isCorrect ? 'correct' : 'wrong');
+  allOpts[questions[qi].correct].classList.add('correct');
+  card.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+
+  card.querySelector('.mcq-explain').classList.add('visible');
+
+  answered++;
+  if (isCorrect) correct++;
+  updateProgress();
+
+  if (answered === questions.length) {
+    setTimeout(showResults, 600);
+  }
+}
+
+function updateProgress() {
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('score-display').textContent = `${correct} / ${questions.length}`;
+}
+
+function showResults() {
+  const panel = document.getElementById('results-panel');
+  const pct = Math.round((correct / questions.length) * 100);
+  document.getElementById('final-score').textContent = `${correct} / ${questions.length} (${pct}%)`;
+  let msg = '';
+  if (pct >= 85) msg = 'Outstanding — you have a strong command of hepatobiliary surgery. Well done!';
+  else if (pct >= 70) msg = 'Good performance — review the questions you missed and revisit those topics before finals.';
+  else if (pct >= 55) msg = 'Satisfactory — some key concepts need reinforcing. Focus on areas where you hesitated.';
+  else msg = 'This is a challenging topic — work through the lecture notes and short answer questions again, then retake.';
+  document.getElementById('result-msg').textContent = msg;
+  panel.style.display = 'block';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetMCQ() {
+  document.getElementById('results-panel').style.display = 'none';
+  renderMCQ();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initialise
+renderMCQ();
+</script>
+</body>
+</html>
